@@ -57,7 +57,7 @@
     NSString *documentFolderPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
     NSLog(@"Tile Directory: %@", tileDirectory);
     NSLog(@"Doc Directory: %@", documentFolderPath);
-    UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+    // UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
     CDVPluginResult* result = [CDVPluginResult resultWithStatus: CDVCommandStatus_OK messageAsString:[NSString stringWithFormat:@"%@/%@%@", documentFolderPath, ImageName, extension]];
     [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
 }
