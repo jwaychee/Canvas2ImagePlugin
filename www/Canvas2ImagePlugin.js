@@ -33,6 +33,7 @@
             if (picfolder) {
               params=[imageData,extension,destQuality,picfolder, add2galery];
             }
+            console.log("js picfolder: " + picfolder);
             return cordova.exec(successCallback, failureCallback, "Canvas2ImagePlugin","saveImageDataToLibrary",params);
         }
     }

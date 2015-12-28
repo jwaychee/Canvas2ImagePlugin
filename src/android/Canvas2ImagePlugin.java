@@ -44,13 +44,13 @@ public class Canvas2ImagePlugin extends CordovaPlugin {
 			String picfolder= Environment.DIRECTORY_PICTURES;
 			boolean add2Galery=true;
 			if (data.length()>3) picfolder=data.optString(3);
-			if (data.length()>4) add2Galery=Boolean.valueOf(data.optString(4));
-				
+			if (data.length()>4) add2Galery=data.optBoolean(4);
+			
 			if (base64.equals("")) // isEmpty() requires API level 9
 				callbackContext.error("Missing base64 string");
 			
 			// Create the bitmap from the base64 string
-			Log.d("Canvas2ImagePlugin", base64);
+			//Log.d("Canvas2ImagePlugin", base64);
 			byte[] decodedString = Base64.decode(base64, Base64.DEFAULT);
 			Bitmap bmp = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
 			if (bmp == null) {
@@ -113,11 +113,14 @@ public class Canvas2ImagePlugin extends CordovaPlugin {
 						.getExternalStoragePublicDirectory(picfolder);
 				}
 				else{
+				
 					folder = new File(picfolder);
 				}
+
 				if(!folder.exists()) {
 					folder.mkdirs();
 				}
+				
 			} else {
 				folder = Environment.getExternalStorageDirectory();
 			}

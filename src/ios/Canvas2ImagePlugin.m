@@ -53,14 +53,13 @@
     BOOL add2galery = [[command.arguments objectAtIndex:4] boolValue];
         
     if(picfolder)
-        [self saveImage:image withFileName:ImageName ofType:extension inDirectory:path and:quality];
-    
-    NSString *tileDirectory = [[NSBundle mainBundle] resourcePath];
-    NSString *documentFolderPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-    NSLog(@"Tile Directory: %@", tileDirectory);
-    NSLog(@"Doc Directory: %@", documentFolderPath);
+        path = picfolder;
+	
+    [self saveImage:image withFileName:ImageName ofType:extension inDirectory:path and:quality];
+        
+    NSLog(@"Doc Directory: %@", path);
     if(add2galery) UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
-    CDVPluginResult* result = [CDVPluginResult resultWithStatus: CDVCommandStatus_OK messageAsString:[NSString stringWithFormat:@"%@/%@%@", documentFolderPath, ImageName, extension]];
+    CDVPluginResult* result = [CDVPluginResult resultWithStatus: CDVCommandStatus_OK messageAsString:[NSString stringWithFormat:@"%@/%@%@", path, ImageName, extension]];
     [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
 }
 
