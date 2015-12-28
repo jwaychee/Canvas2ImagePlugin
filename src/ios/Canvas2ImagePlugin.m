@@ -50,9 +50,10 @@
     CGFloat quality = 1.0;
     quality = [[command.arguments objectAtIndex:2] floatValue] / 100;
     NSString *picfolder = [command.arguments objectAtIndex:3];
-    BOOL add2galery = [command.arguments objectAtIndex:4];
-    
-    if(picfolder) [self saveImage:image withFileName:ImageName ofType:extension inDirectory:path and:quality];
+    BOOL add2galery = [[command.arguments objectAtIndex:4] boolValue];
+        
+    if(picfolder)
+        [self saveImage:image withFileName:ImageName ofType:extension inDirectory:path and:quality];
     
     NSString *tileDirectory = [[NSBundle mainBundle] resourcePath];
     NSString *documentFolderPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];

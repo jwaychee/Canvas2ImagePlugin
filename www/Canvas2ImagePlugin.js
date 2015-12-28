@@ -31,8 +31,7 @@
             } catch (e){}
             var params= [imageData,extension,destQuality];
             if (picfolder) {
-              params=[imageData,extension,destQuality,picfolder];
-              if (add2galery) params.push(add2galery);
+              params=[imageData,extension,destQuality,picfolder, add2galery];
             }
             return cordova.exec(successCallback, failureCallback, "Canvas2ImagePlugin","saveImageDataToLibrary",params);
         }
