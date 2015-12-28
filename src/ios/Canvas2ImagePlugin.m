@@ -49,15 +49,16 @@
     extension = [command.arguments objectAtIndex:1];
     CGFloat quality = 1.0;
     quality = [[command.arguments objectAtIndex:2] floatValue] / 100;
+    NSString *picfolder = [command.arguments objectAtIndex:3];
+    BOOL add2galery = [command.arguments objectAtIndex:4];
     
-    
-    [self saveImage:image withFileName:ImageName ofType:extension inDirectory:path and:quality];
+    if(picfolder) [self saveImage:image withFileName:ImageName ofType:extension inDirectory:path and:quality];
     
     NSString *tileDirectory = [[NSBundle mainBundle] resourcePath];
     NSString *documentFolderPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
     NSLog(@"Tile Directory: %@", tileDirectory);
     NSLog(@"Doc Directory: %@", documentFolderPath);
-    // UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+    if(add2galery) UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
     CDVPluginResult* result = [CDVPluginResult resultWithStatus: CDVCommandStatus_OK messageAsString:[NSString stringWithFormat:@"%@/%@%@", documentFolderPath, ImageName, extension]];
     [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
 }
